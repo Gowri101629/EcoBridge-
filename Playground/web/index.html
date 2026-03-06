@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoBridge - Sustainable Market Advisor</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div class="container" id="loginPage">
+    <h2>EcoBridge</h2>
+    <input id="loginInput" placeholder="Email / Phone" />
+    <input type="password" placeholder="Password" />
+    <button onclick="login(this)">Login</button>
+    <div class="link" onclick="showSignup()">Create new account? Sign Up</div>
+  </div>
+
+  <!-- SIGNUP PAGE -->
+  <div class="container" id="signupPage" style="display:none">
+    <h2>Sign Up</h2>
+    <input id="signupName" placeholder="Farmer Name" />
+    <input id="signupLocation" placeholder="Location" />
+    <input id="signupExperience" placeholder="Farming Experience (Years)" />
+    <input id="signupPhone" placeholder="Phone Number" />
+    <input type="password" placeholder="Password" />
+    <button onclick="signup(this)">Create Account</button>
+    <div class="link" onclick="showLogin()">Already have account? Login</div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="homePage" style="display:none">
+    <div class="header">
+      <div class="brand-wrap" style="justify-content: center;">
+        <img class="brand-logo" src="EcoBridge.jpg" alt="EcoBridge logo"
+          style="width: 40px; height: 40px; margin-right: 10px;" />
+        <span>EcoBridge</span>
+      </div>
+    </div>
+
+    <!-- MAIN VIEWS CONTAINER -->
+    <div id="viewHome" class="view-section active-view">
+
+      <!-- User Info block -->
+      <div class="section user-info-card">
+        <h3>Farmer Details</h3>
+        <p id="farmerNameDisplay"></p>
+        <p id="farmerLocationDisplay"></p>
+        <p id="farmerExpDisplay"></p>
+      </div>
+
+      <!-- General Controls & Settings previously top-level -->
+      <div class="section">
+        <h3>App Settings</h3>
+        <div class="grid two">
+          <label>
+            Target City
+            <select id="citySelect"></select>
+          </label>
+          <label>
+            App Mode
+            <select id="modeSelect">
+              <option value="ai">AI Mode (Guidance + Pricing)</option>
+              <option value="regular">Regular Mode (Pricing Only)</option>
+            </select>
+          </label>
+        </div>
+        <div id="cityButtons" class="city-buttons"></div>
+        <p id="modeBanner" class="banner"></p>
+      </div>
+
+      <!-- AI Voice Assistant Block (from old index.html) -->
+      <section id="aiSections" class="stack">
+        <div class="section">
+          <h3>AI Voice Assistant (Farming Q&A)</h3>
+          <div class="searchContainer">
+            <input id="questionInput" placeholder="Ask EcoBridge AI about crops..." />
+            <img class="micIcon" src="micicon.jpg" alt="mic" id="voiceBtn" />
+          </div>
+          <button id="askBtn" type="button" class="mt-2 text-btn">Get AI Answer</button>
+          <p id="voiceStatus" class="hint"></p>
+          <div id="aiAnswer" class="answer"></div>
+        </div>
+
+        <div class="section">
+          <h3>Crop Rotation Suggestion</h3>
+          <div class="grid three">
+            <label>Current Crop<select id="currentCrop"></select></label>
+            <label>Soil Type
+              <select id="soilType">
+                <option value="loamy">Loamy</option>
+                <option value="clay">Clay</option>
+                <option value="sandy">Sandy</option>
+                <option value="black">Black Soil</option>
+              </select>
+            </label>
+            <button id="rotationBtn" type="button">Suggest Rotation</button>
+          </div>
+          <div id="rotationOutput" class="answer"></div>
+        </div>
+
+        <div class="section">
+          <h3>Climate Risk Adaptation</h3>
+          <p class="hint">City-specific alerts and actions.</p>
+          <div id="climateOutput" class="answer"></div>
+        </div>
+
+        <div class="section">
+          <h3>Beginner Farming Guide (AI)</h3>
+          <div id="beginnerGuide" class="answer"></div>
+        </div>
+      </section>
+
+
+    </div> <!-- END Home View -->
+
+    <!-- CATALOG VIEW -->
+    <div id="viewCatalog" class="view-section" style="display:none;">
+      <div class="section">
+        <h3>Selected Crop Summary</h3>
+        <div id="summaryCards" class="summary-grid"></div>
+      </div>
+
+      <div class="section">
+        <h3>Demand Catalogue (Organic Priority)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Crop</th>
+                <th>Type</th>
+                <th>Score</th>
+                <th>Price</th>
+                <th>Premium</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody id="catalogueRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Pricing Board</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Market</th>
+                <th>Crop</th>
+                <th>Min</th>
+                <th>Modal</th>
+                <th>Max</th>
+                <th>Trend</th>
+              </tr>
+            </thead>
+            <tbody id="priceRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Full Table of All Crops -->
+      <div class="section">
+        <h3>All Crops In Selected City</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Crop</th>
+                <th>Category</th>
+                <th>Score</th>
+                <th>Avg Price</th>
+                <th>Organic</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="allCropRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- END Catalog View -->
+
+
+    <!-- HISTORY / PROFILE VIEW -->
+    <div id="viewHistory" class="view-section" style="display:none;">
+      <div class="section">
+        <h3>Farmer Registration / Update</h3>
+        <p class="hint">Stores farmer profile, soil type, harvested crops, and contact details.</p>
+        <form id="farmerForm" class="grid three">
+          <label>Full Name<input id="farmerName" required type="text" placeholder="Farmer name" /></label>
+          <label>Soil Type
+            <select id="farmerSoil">
+              <option value="Loamy">Loamy</option>
+              <option value="Clay">Clay</option>
+              <option value="Sandy">Sandy</option>
+              <option value="Black Soil">Black Soil</option>
+            </select>
+          </label>
+          <label>Experience (years)<input id="farmerExp" required type="number" min="0" value="1" /></label>
+          <label>Email<input id="farmerEmail" type="email" placeholder="name@example.com" /></label>
+          <label>Phone<input id="farmerPhone" type="text" placeholder="+91..." /></label>
+
+          <div id="harvestedCropsWrapper" style="display:none; grid-column: 1 / -1;">
+            <label>Harvested Crops (comma separated)<input id="farmerCrops" type="text"
+                placeholder="Tomato,Ragi,Turmeric" /></label>
+          </div>
+
+          <button id="farmerSubmit" type="submit">Save Farmer Profile</button>
+        </form>
+        <p id="farmerStatus" class="hint"></p>
+      </div>
+
+      <div class="section">
+        <h3>Creator View - Farmer Registry</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>City</th>
+                <th>Soil Type</th>
+                <th>Experience</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody id="farmerAdminRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- END History / Profile View -->
+
+    <!-- BOTTOM NAV -->
+    <div class="bottomNav">
+      <div class="navItem" onclick="switchTab('viewHome')">
+        <img src="homeicon.png" alt="Home">
+      </div>
+      <div class="navItem" onclick="switchTab('viewCatalog')">
+        <img src="catalogueicon.png" alt="Catalog">
+      </div>
+      <div class="navItem" onclick="switchTab('viewHistory')">
+        <img src="historyicon.png" alt="History/Profile">
+      </div>
+    </div>
+
+  </div> <!-- END MAIN APP CONTAINER -->
+
+  <!-- Load our updated Javascript -->
+  <script src="./app.js"></script>
+</body>
+
+</html>

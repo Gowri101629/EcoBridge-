@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EcoBridge</title>
+<style>
+
+body{
+font-family: Arial;
+background:#f5f5f5;
+margin:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.container{
+width:350px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+color:#2e7d32;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#2e7d32;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:disabled{
+background:#aaa;
+}
+
+.link{
+text-align:center;
+margin-top:10px;
+color:blue;
+cursor:pointer;
+}
+
+.loader{
+border:3px solid #f3f3f3;
+border-top:3px solid white;
+border-radius:50%;
+width:16px;
+height:16px;
+animation:spin 1s linear infinite;
+display:inline-block;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+/* HOME PAGE */
+
+#homePage{
+display:none;
+height:100vh;
+width:100%;
+background:#f5f5f5;
+}
+
+.header{
+background:#2e7d32;
+color:white;
+padding:15px;
+text-align:center;
+font-size:20px;
+}
+
+.section{
+background:white;
+margin:10px;
+padding:15px;
+border-radius:10px;
+}
+
+.searchBox{
+display:flex;
+gap:5px;
+}
+
+.searchBox input{
+flex:1;
+}
+
+.bottomNav{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:10px;
+border-top:1px solid #ccc;
+}
+
+.navBtn{
+cursor:pointer;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="loginPage">
+
+<h2>EcoBridge</h2>
+
+<input type="text" placeholder="Email / Phone">
+<input type="password" placeholder="Password">
+
+<button onclick="login(this)">Login</button>
+
+<div class="link" onclick="showSignup()">Create new account? Sign Up</div>
+
+</div>
+
+
+<div class="container" id="signupPage" style="display:none">
+
+<h2>Sign Up</h2>
+
+<input id="name" placeholder="Farmer Name">
+<input id="location" placeholder="Location">
+<input id="experience" placeholder="Farming Experience">
+<input placeholder="Phone Number">
+<input type="password" placeholder="Password">
+
+<button onclick="signup(this)">Create Account</button>
+
+<div class="link" onclick="showLogin()">Already have account? Login</div>
+
+</div>
+
+
+
+<div id="homePage">
+
+<div class="header">EcoBridge</div>
+
+<div class="section">
+<h3>Farmer Details</h3>
+<p id="farmerName"></p>
+<p id="farmerLocation"></p>
+<p id="farmerExp"></p>
+</div>
+
+<div class="section">
+<h3>AI Search</h3>
+<div class="searchBox">
+<input placeholder="Ask EcoBridge AI...">
+<button>🎤</button>
+</div>
+</div>
+
+<div class="section">
+<h3>Demanded Crops In Your Area</h3>
+<ul>
+<li>Tomato</li>
+<li>Groundnut</li>
+<li>Millets</li>
+<li>Turmeric</li>
+</ul>
+</div>
+
+<div class="bottomNav">
+<div class="navBtn">Home</div>
+<div class="navBtn">Catalog</div>
+<div class="navBtn">History</div>
+</div>
+
+</div>
+
+
+<script>
+
+function showSignup(){
+document.getElementById("loginPage").style.display="none"
+document.getElementById("signupPage").style.display="block"
+}
+
+function showLogin(){
+document.getElementById("signupPage").style.display="none"
+document.getElementById("loginPage").style.display="block"
+}
+
+function login(btn){
+btn.innerHTML='<div class="loader"></div>'
+btn.disabled=true
+
+setTimeout(()=>{
+document.getElementById("loginPage").style.display="none"
+document.getElementById("homePage").style.display="block"
+},1500)
+}
+
+function signup(btn){
+
+btn.innerHTML='<div class="loader"></div>'
+btn.disabled=true
+
+let name=document.getElementById("name").value
+let location=document.getElementById("location").value
+let exp=document.getElementById("experience").value
+
+setTimeout(()=>{
+
+document.getElementById("signupPage").style.display="none"
+document.getElementById("homePage").style.display="block"
+
+document.getElementById("farmerName").innerText="Name: "+name
+document.getElementById("farmerLocation").innerText="Location: "+location
+document.getElementById("farmerExp").innerText="Experience: "+exp+" years"
+
+},1500)
+
+}
+
+</script>
+
+</body>
+</html>

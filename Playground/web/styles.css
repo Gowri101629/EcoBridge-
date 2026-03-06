@@ -1,0 +1,399 @@
+:root {
+  --bg: #f5f7f4;
+  --panel: #ffffff;
+  --text: #1b2a20;
+  --muted: #4c5f52;
+  --line: #d4ddd3;
+  --ok: #ddf2e1;
+  --off: #f9e6c8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(90, 145, 103, 0.15), transparent 30%),
+    radial-gradient(circle at 100% 0%, rgba(239, 205, 140, 0.25), transparent 28%),
+    var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  
+  /* Centering layout for Login / App feel */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ==================================================
+   LOGIN + SIGNUP
+================================================== */
+.container {
+  width: 360px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.container h2 {
+  text-align: center;
+  color: #2e7d32;
+}
+
+.container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container button {
+  width: 100%;
+  padding: 10px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.link {
+  text-align: center;
+  margin-top: 10px;
+  color: blue;
+  cursor: pointer;
+}
+
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ==================================================
+   MAIN MOBILE-LIKE APP SHELL
+================================================== */
+#homePage {
+  height: 100vh;
+  width: 100%;
+  max-width: 600px;
+  background: #f5f5f5;
+  overflow-y: auto;
+  position: relative;
+  /* hide scrollbar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+#homePage::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  background: #2e7d32;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Individual Content Section */
+.section {
+  background: white;
+  margin: 12px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.user-info-card p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* ==================================================
+   FEATURE BLOCKS & AI
+================================================== */
+.searchContainer {
+  position: relative;
+  margin-top: 8px;
+}
+
+.searchContainer input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 40px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+}
+
+.micIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.text-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* ==================================================
+   CROP CARDS (Horizontal Scroll)
+================================================== */
+.cropContainer {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 5px 0 10px;
+}
+
+.cropContainer::-webkit-scrollbar {
+  height: 6px;
+}
+.cropContainer::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.cropCard {
+  min-width: 120px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  text-align: center;
+  padding: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.cropCard img {
+  width: 100%;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.cropCard p {
+  margin: 8px 0 0;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.cropCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+/* ==================================================
+   BOTTOM NAV
+================================================== */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 600px; /* same as homepage max-width */
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  border-top: 1px solid #ccc;
+  z-index: 20;
+}
+
+.navItem {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #eee;
+}
+
+.navItem:last-child {
+  border-right: none;
+}
+
+.navItem img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  filter: grayscale(1);
+  transition: filter 0.2s ease;
+}
+
+.navItem:hover img {
+  filter: grayscale(0);
+}
+
+/* Add some padding to bottom so contents aren't hidden by nav */
+.view-section {
+  padding-bottom: 70px; 
+}
+
+
+/* ==================================================
+   EXISTING STYLES (Retained for Internal Forms & Tables)
+================================================== */
+h2, h3 {
+  margin: 0 0 8px;
+  color: #2e7d32;
+}
+
+.grid {
+  display: grid;
+  gap: 10px;
+}
+.grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: end;
+}
+label {
+  display: grid;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+select,
+button.standard {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid #bcc8be;
+  border-radius: 6px;
+}
+button, button.standard {
+  background: #2e6a45;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+}
+button:hover {
+  filter: brightness(1.06);
+}
+.mini-btn {
+  padding: 5px 8px;
+  font-size: 0.82rem;
+}
+
+/* TABLES */
+.table-wrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: collapse;
+}
+th, td {
+  text-align: left;
+  padding: 8px 7px;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #e1e7df;
+}
+
+/* HELPERS */
+.hint {
+  margin: 4px 0 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.answer {
+  background: #f8fbf7;
+  border: 1px solid #dce6dc;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+.answer ul {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+.stack {
+  display: grid;
+  gap: 12px;
+}
+.hidden {
+  display: none;
+}
+
+/* CARDS / BANNERS */
+.banner {
+  margin: 10px 0 0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+.banner.ok { background: var(--ok); }
+.banner.off { background: var(--off); }
+
+.city-buttons {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  background: #eef3ed;
+  color: #1f3b2a;
+  border: 1px solid #ccd8cf;
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+.chip.active {
+  background: #2e6a45;
+  color: #fff;
+  border-color: #2e6a45;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.summary-card {
+  border: 1px solid #dce4d8;
+  background: linear-gradient(150deg, #f7fbf7 0%, #edf4ed 100%);
+  border-radius: 10px;
+  padding: 10px;
+}
+.summary-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.summary-card h3 {
+  margin: 6px 0 0;
+  font-size: 1.05rem;
+}
